@@ -10,6 +10,7 @@ NUSERS = 100
 NSIGHTINGS = 200
 NCOMMENTS = 4000
 
+
 class Command(BaseCommand):
     help = "Generates fake data"
 
@@ -53,9 +54,13 @@ class Command(BaseCommand):
             else:
                 owner = random.choice(users)
             sighthing = random.choice(sighthings)
-            
-            comment = Comment(owner=owner,
+
+            comment = Comment(
+                owner=owner,
                 sighthing=sighthing,
                 content=faker_obj.text(),
-                date_added=faker_obj.date_between(start_date=sighthing.date_added))
+                date_added=faker_obj.date_between(
+                    start_date=sighthing.date_added
+                )
+            )
             comment.save()
