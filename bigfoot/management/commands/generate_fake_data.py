@@ -22,14 +22,17 @@ class Command(BaseCommand):
             m.objects.all().delete()
 
         faker_obj = faker.Faker()
+        faker.Faker.seed(4321)  # always generate same data
 
         self.stdout.write("Generating users...")
         users = []
         for _ in range(NUSERS):
-            profile = faker_obj.simple_profile()
-
-            user = User(username=profile['username'], email=profile['mail'])
+            user = User(
+                username=faker_obj.unique.name(),
+                email=faker_obj.unique.email()
+            )
             user.save()
+            print(user.username)
 
             users.append(user)
 
