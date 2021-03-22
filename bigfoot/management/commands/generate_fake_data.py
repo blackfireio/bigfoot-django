@@ -32,7 +32,6 @@ class Command(BaseCommand):
                 email=faker_obj.unique.email()
             )
             user.save()
-            print(user.username)
 
             users.append(user)
 
