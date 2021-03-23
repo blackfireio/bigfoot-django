@@ -25,5 +25,9 @@ def sightings_partial(request):
 
 
 def sightings_show(request, sighting_id):
-    sighting = Sighting.objects.get(id=sighting_id)
+    # prefetch_related() fixes the problem of retrieving owner for each comment
+    # displayed.
+    sighting = Sighting.objects.prefetch_related('comment_set__owner').get(
+        id=sighting_id
+    )
     return render(request, 'sighting_show.html', {'sighting': sighting})
