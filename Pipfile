@@ -1,0 +1,16 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+blackfire = ">=1.5.3"
+Django = ">=3.1.6,<4.0"
+Faker = ">=6.6.1"
+gunicorn = "*"
+platformshconfig = "~=2.0"
+
+[dev-packages]
+
+[requires]
+python_version = "3.9"
