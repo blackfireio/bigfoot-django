@@ -1,5 +1,14 @@
 # This is a sample .blackfire.yaml file created by Blackfire.
 # You can read more about .blackfire.yaml here: https://blackfire.io/docs/cookbooks/tests
+metrics:
+    app.user_activity_calculation:
+        label: "User activity calculation"
+        timeline: true
+        marker: true
+        matching_calls:
+            python:
+                - callee: '=bigfoot.models.User.get_recent_comments_count'
+
 tests:
     "The homepage should be fast":
         path: "/"
