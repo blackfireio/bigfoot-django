@@ -9,6 +9,7 @@ Django = ">=3.1.6,<4.0"
 Faker = ">=6.6.1"
 gunicorn = "*"
 platformshconfig = "~=2.0"
+psycopg2 = "*"
 
 [dev-packages]
 

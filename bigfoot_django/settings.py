@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 from pathlib import Path
 
+from platformshconfig import Config
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -79,8 +81,12 @@ WSGI_APPLICATION = 'bigfoot_django.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'bigfoot',
+        'USER': 'bigfoot',
+        'PASSWORD': 'bigfoot',
+        'HOST': 'localhost',
+        'PORT': '5432',
     }
 }
 
@@ -122,3 +128,28 @@ USE_TZ = False
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# Import some Platform.sh settings from the environment.
+config = Config()
+if config.is_valid_platform():
+
+    if config.appDir:
+        STATIC_ROOT = os.path.join(config.appDir, 'static')
+    if config.projectEntropy:
+        SECRET_KEY = config.projectEntropy
+
+    db_settings = config.credentials('database')
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': db_settings['path'],
+            'USER': db_settings['username'],
+            'PASSWORD': db_settings['password'],
+            'HOST': db_settings['host'],
+            'PORT': db_settings['port'],
+        },
+        'sqlite': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        }
+    }
