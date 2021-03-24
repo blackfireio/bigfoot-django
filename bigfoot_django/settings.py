@@ -28,6 +28,7 @@ SECRET_KEY = '90ny91c0)^1zl=_tr%6r%edy9-hn%2yssqg_wd3*sr@+8941*z'
 DEBUG = True
 
 ALLOWED_HOSTS = [
+    'localhost',
     'main-bvxea6i-wqxtdi6snukl6.eu-4.platformsh.site',
     'www.main-bvxea6i-wqxtdi6snukl6.eu-4.platformsh.site',
 ]
