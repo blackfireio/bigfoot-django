@@ -26,7 +26,7 @@ relationships:
 web:
     # Commands are run once after deployment to start the application process.
     commands:
-        start: "BLACKFIRE_LOG_FILE=/app/logs/blackfire-probe.log blackfire-python gunicorn -w 4 -b $PORT bigfoot_django.wsgi:application"
+        start: "BLACKFIRE_LOG_FILE=/app/logs/blackfire-probe.log blackfire-python gunicorn -w 4 -b 0.0.0.0:$PORT bigfoot_django.wsgi:application"
     locations:
         "/":
             passthru: true
