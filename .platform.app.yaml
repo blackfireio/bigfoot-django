@@ -65,6 +65,4 @@ hooks:
     rm -rf logs
   deploy: |
     python manage.py migrate
-    python manage.py makemigrations bigfoot
-    python manage.py migrate bigfoot
     python manage.py generate_fake_data
