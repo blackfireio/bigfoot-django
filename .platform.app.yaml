@@ -9,10 +9,15 @@ name: app
 # to find the supported versions for the 'python' type.
 type: 'python:3.9'
 
+runtime:
+    extensions:
+        - blackfire
+
 # The build-time dependencies of the app.
 dependencies:
     python3:
-       pipenv: '2020.11.15'
+        pip: '21.0'
+        pipenv: '2020.11.15'
 
 # The relationships of the application with services or other applications.
 #
