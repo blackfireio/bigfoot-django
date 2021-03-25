@@ -30,8 +30,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
     'localhost',
-    'main-bvxea6i-wqxtdi6snukl6.eu-4.platformsh.site',
-    'www.main-bvxea6i-wqxtdi6snukl6.eu-4.platformsh.site',
+    '.platformsh.site',
 ]
 
 
