@@ -18,6 +18,7 @@ dependencies:
     python3:
         pip: '21.0'
         pipenv: '2020.11.15'
+        supervisor: '*'
 
 # The relationships of the application with services or other applications.
 #
@@ -33,7 +34,7 @@ web:
         socket_family: unix
     # Commands are run once after deployment to start the application process.
     commands:
-        start: "BLACKFIRE_LOG_FILE=/app/logs/blackfire-probe.log blackfire-python gunicorn -w 4 -b unix:$SOCKET bigfoot_django.wsgi:application"
+        start: "supervisord -n -c supervisord.conf"
     locations:
         "/":
             passthru: true
@@ -62,6 +63,17 @@ hooks:
   # The build hook runs before the application is deployed, and is useful for
   # assembling the codebase.
   build: |
+    # Installing blackfire-agent
+    (
+        mkdir -p ${PLATFORM_CACHE_DIR}/blackfire
+        cd ${PLATFORM_CACHE_DIR}/blackfire
+        wget -q -O agent.tar.gz -L https://blackfire.io/api/v1/releases/agent/linux_static/amd64
+        tar -xzf agent.tar.gz
+        chmod +x agent
+        cp agent ${PLATFORM_APP_DIR}/.global/bin/blackfire-agent
+        rm agent.tar.gz agent agent.sha1
+    )
+
     pipenv install --system --deploy
     mkdir logs
     python manage.py collectstatic
