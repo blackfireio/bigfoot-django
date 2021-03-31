@@ -4,7 +4,7 @@ import random
 from django.db import transaction
 from django.core.management.base import BaseCommand
 
-from bigfoot.models import User, Sighthing, Comment
+from bigfoot.models import User, Sighting, Comment
 
 NUSERS = 100
 NSIGHTINGS = 200
@@ -17,7 +17,7 @@ class Command(BaseCommand):
     @transaction.atomic
     def handle(self, *args, **kwargs):
         self.stdout.write("Deleting old data...")
-        models = [User, Sighthing, Comment]
+        models = [User, Sighting, Comment]
         for m in models:
             m.objects.all().delete()
 
@@ -38,7 +38,7 @@ class Command(BaseCommand):
         self.stdout.write("Generating sightings...")
         sighthings = []
         for _ in range(NSIGHTINGS):
-            sighthing = Sighthing(
+            sighthing = Sighting(
                 description=faker_obj.text(),
                 title=faker_obj.text()[:80],
                 owner=random.choice(users),

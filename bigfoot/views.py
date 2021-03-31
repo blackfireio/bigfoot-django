@@ -1,13 +1,13 @@
 from django.shortcuts import render
 from django.template import loader
 
-from bigfoot.models import Sighthing
+from bigfoot.models import Sighting
 
 
 def home(request):
     return render(
         request, 'index.html', {
-            'sightings': Sighthing.objects.all(),
+            'sightings': Sighting.objects.all(),
         }
     )
 
@@ -25,5 +25,5 @@ def sightings_partial(request):
 
 
 def sightings_show(request, sighting_id):
-    sighting = Sighthing.objects.get(id=sighting_id)
+    sighting = Sighting.objects.get(id=sighting_id)
     return render(request, 'sighting_show.html', {'sighting': sighting})

@@ -22,7 +22,7 @@ class User(models.Model):
         return recent_comment_count
 
 
-class Sighthing(models.Model):
+class Sighting(models.Model):
     description = models.TextField()
     title = models.CharField(max_length=255)
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -33,5 +33,5 @@ class Sighthing(models.Model):
 class Comment(models.Model):
     content = models.TextField()
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
-    sighthing = models.ForeignKey(Sighthing, on_delete=models.CASCADE)
+    sighting = models.ForeignKey(Sighting, on_delete=models.CASCADE)
     date_added = models.DateTimeField()
