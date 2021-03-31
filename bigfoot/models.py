@@ -7,6 +7,9 @@ class User(models.Model):
     email = models.CharField(max_length=180, unique=True)
     username = models.CharField(max_length=100, unique=True)
 
+    def __init__(self, *args, **kwargs):
+        super(User, self).__init__(*args, **kwargs)
+
     def get_avatar_url(self):
         return 'https://avatars.dicebear.com/4.5/api/human/%s.svg?mood[]=happy' % (
             self.email
@@ -29,9 +32,15 @@ class Sighting(models.Model):
     date_added = models.DateTimeField()
     score = models.IntegerField(default=0)
 
+    def __init__(self, *args, **kwargs):
+        super(Sighting, self).__init__(*args, **kwargs)
+
 
 class Comment(models.Model):
     content = models.TextField()
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     sighting = models.ForeignKey(Sighting, on_delete=models.CASCADE)
     date_added = models.DateTimeField()
+
+    def __init__(self, *args, **kwargs):
+        super(Comment, self).__init__(*args, **kwargs)
