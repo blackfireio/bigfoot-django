@@ -1,21 +1,31 @@
-# bigfoot_django
+# BigFoot Django project
 
 ## Installation
 
 Tested only with Python 3.9.
 
-1) Install requirements:
+1. Install requirements using `pipenv`:
 
-   `pip install -r requirements.txt`
+   ```bash
+   pipenv install
+   ```
 
-2) Generate fake data:
+1. Start the PostGreSQL container:
+
+   ```bash
+   docker-compose up -d
+   ```
+
+1. Generate fake data:
    
-   ```python
-   python manage.py makemigrations bigfoot
-   python manage.py migrate bigfoot
+   ```bash
+   # Run the following command in the pipenv shell
+   python manage.py migrate
    python manage.py generate_fake_data
    ```
 
-3) Run server:
+1. Run server with `blackfire-python`:
 
-   `python manage.py runserver`
+   ```bash
+   blackfire-python manage.py runserver
+   ```
