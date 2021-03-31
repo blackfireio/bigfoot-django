@@ -10,14 +10,15 @@ class User(models.Model):
     def __init__(self, *args, **kwargs):
         super(User, self).__init__(*args, **kwargs)
 
+    def __str__(self):
+        return self.username
+
     def get_avatar_url(self):
-        return 'https://avatars.dicebear.com/4.5/api/human/%s.svg?mood[]=happy' % (
-            self.email
-        )
+        return f'https://avatars.dicebear.com/4.5/api/human/{self.email}.svg?mood[]=happy'
 
     def get_recent_comments_count(self):
         recent_comment_count = 0
-        comments = Comment.objects.filter(owner__id=self.id)
+        comments = Comment.objects.filter(owner_id=self.id)
         for comment in comments.all():
             if comment.date_added.month - datetime.datetime.now().month <= 3:
                 recent_comment_count += 1
@@ -35,6 +36,9 @@ class Sighting(models.Model):
     def __init__(self, *args, **kwargs):
         super(Sighting, self).__init__(*args, **kwargs)
 
+    def __str__(self):
+        return self.title
+
 
 class Comment(models.Model):
     content = models.TextField()
@@ -44,3 +48,6 @@ class Comment(models.Model):
 
     def __init__(self, *args, **kwargs):
         super(Comment, self).__init__(*args, **kwargs)
+
+    def __str__(self):
+        return self.content
