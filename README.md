@@ -29,3 +29,5 @@ Tested only with Python 3.9.
    ```bash
    blackfire-python manage.py runserver
    ```
+
+test
