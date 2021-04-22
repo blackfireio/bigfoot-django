@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.template import loader
+from django.db.models import Count
 
 from bigfoot.models import Sighting
 
@@ -7,7 +8,7 @@ from bigfoot.models import Sighting
 def home(request):
     return render(
         request, 'index.html', {
-            'sightings': Sighting.objects.all(),
+            'sightings': Sighting.objects.annotate(Count('comment')).all(),
         }
     )
 
