@@ -11,7 +11,7 @@
     </td>
     <td>
         <a class="text-white table-content text-center"
-            href="{% url 'app_sighting_show' sighting.id %}">{{ sighting.comment_set.all|length }}</a>
+            href="{% url 'app_sighting_show' sighting.id %}">{{ sighting.comment__count }}</a>
     </td>
 </tr>
 {% endfor %}
