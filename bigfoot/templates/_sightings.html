@@ -7,11 +7,11 @@
     </td>
     <td class="text-nowrap">
         <time class="table-content"
-            datetime="{{ sighting.createdAt|date:'Y-m-d H:i' }}">{{ sighting.createdAt|timesince }}</time>
+            datetime="{{ sighting.date_added|date:'Y-m-d H:i' }}">{{ sighting.date_added|timesince }}</time>
     </td>
     <td>
         <a class="text-white table-content text-center"
-            href="{% url 'app_sighting_show' sighting.id %}">{{ sighting.comments|length }}</a>
+            href="{% url 'app_sighting_show' sighting.id %}">{{ sighting.comment_set.all|length }}</a>
     </td>
 </tr>
 {% endfor %}
