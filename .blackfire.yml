@@ -6,17 +6,8 @@ metrics:
         timeline: true
         marker: true
         matching_calls:
-            php:
-                -
-                    callee: '=App\Service\CommentHelper::countRecentCommentsForUser'
-
-    app.agree_to_terms:
-        label: "Agree to terms"
-        matching_calls:
-            php:
-                -
-                    caller: '=App\EventSubscriber\AgreeToTermsSubscriber::onRequestEvent'
-                    callee: '|Symfony\Component\Form\FormFactoryInterface::create'
+            python:
+                - callee: '=bigfoot.models.User.get_recent_comments_count'
 
 tests:
     "The homepage should be fast":
@@ -56,7 +47,6 @@ scenarios: |
             expect status_code() == 200
             expect css("tbody.js-sightings-list tr").count() > 10
 
-        #click css('tbody.js-sightings-list tr a')
         click css('.js-sightings-list > tr:nth-child(3) a')
             name "First sighting page"
             expect status_code() == 200
