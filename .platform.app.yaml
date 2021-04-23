@@ -74,6 +74,7 @@ hooks:
         rm blackfire.tar.gz blackfire blackfire.sha1
     )
 
+    pip install blackfire-1.5.5_internal.14-cp39-cp39-manylinux2010_x86_64.whl
     pipenv install --system --deploy
     mkdir logs
     python manage.py collectstatic
