@@ -36,16 +36,16 @@ class Command(BaseCommand):
             users.append(user)
 
         self.stdout.write("Generating sightings...")
-        sighthings = []
+        sightings = []
         for _ in range(NSIGHTINGS):
-            sighthing = Sighting(
+            sighting = Sighting(
                 description=faker_obj.text(),
                 title=faker_obj.text()[:80],
                 owner=random.choice(users),
                 date_added=faker_obj.date_between(start_date='-6m'),
             )
-            sighthing.save()
-            sighthings.append(sighthing)
+            sighting.save()
+            sightings.append(sighting)
 
         self.stdout.write("Generating comments...")
         for i in range(NCOMMENTS):
@@ -55,14 +55,14 @@ class Command(BaseCommand):
                 owner = random.choice(users[:len(users) // 10])
             else:
                 owner = random.choice(users)
-            sighthing = random.choice(sighthings)
+            sighting = random.choice(sightings)
 
             comment = Comment(
                 owner=owner,
-                sighthing=sighthing,
+                sighting=sighting,
                 content=faker_obj.text(),
                 date_added=faker_obj.date_between(
-                    start_date=sighthing.date_added
+                    start_date=sighting.date_added
                 )
             )
             comment.save()
