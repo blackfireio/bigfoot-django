@@ -9,6 +9,14 @@ metrics:
             python:
                 - callee: '=bigfoot.models.User.get_recent_comments_count'
 
+    app.comment_count_annotation:
+        label: "Comment count annotation"
+        timeline: true
+        marker: true
+        matching_calls:
+            python:
+                - callee: '=django.db.models.expressions.Count.resolve_expression'
+
 tests:
     "The homepage should be fast":
         path: "/"
@@ -34,6 +42,11 @@ tests:
         path: "/sighting/.*"
         assertions:
             - "metrics.app.user_activity_calculation.count == 0"
+
+    "Comment count should be annotated to Sighting entity":
+        path: "/"
+        assertions:
+            - "metrics.app.comment_count_annotation.count > 0"
 
 # For writing scenarios, take a look at the documentation
 # https://blackfire.io/docs/cookbooks/scenarios
