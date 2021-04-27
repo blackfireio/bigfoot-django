@@ -1,0 +1,38 @@
+# This is a sample .blackfire.yaml file created by Blackfire.
+# You can read more about .blackfire.yaml here: https://blackfire.io/docs/cookbooks/tests
+tests:
+    "The homepage should be fast":
+        path: "/"
+        assertions:
+            - "main.wall_time < 100ms"
+    
+    "The homepage should not consume too much memory":
+        path: "/"
+        assertions:
+            - "main.peak_memory < 2mb"
+
+    "The number of created entities should be reasonable":
+        path: "/.*"
+        assertions:
+            - "metrics.entities.created.count < 50"
+
+    "The homepage should have a limited number of SQL queries":
+        path: "/"
+        assertions:
+            - "metrics.sql.queries.count <= 5"
+
+# For writing scenarios, take a look at the documentation
+# https://blackfire.io/docs/cookbooks/scenarios
+scenarios: |
+    #!blackfire-player
+
+    scenario
+        name "Basic Visit"
+        visit url("/")
+            name "Homepage"
+            expect status_code() == 200
+            expect css("tbody.js-sightings-list tr").count() > 10
+
+        click css('.js-sightings-list > tr:nth-child(3) a')
+            name "First sighting page"
+            expect status_code() == 200
