@@ -28,9 +28,7 @@ def sightings_partial(request):
     offset = (requested_page - 1) * max
     sightings = Sighting.objects.all()[offset:limit]
 
-    html = loader.render_to_string(
-        '_sightings.html', {'sightings': sightings}, request
-    )
+    html = loader.render_to_string('_sightings.html', {'sightings': sightings}, request)
     next = requested_page + 1
 
     return JsonResponse({
