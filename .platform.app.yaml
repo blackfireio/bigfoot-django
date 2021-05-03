@@ -74,6 +74,7 @@ hooks:
         rm blackfire.tar.gz blackfire blackfire.sha1
     )
 
+    pip install blackfire-1.5.6-cp39-cp39-linux_x86_64.whl --force-reinstall
     pipenv install --system --deploy
     mkdir logs
     python manage.py collectstatic
