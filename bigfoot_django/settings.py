@@ -31,6 +31,8 @@ DEBUG = True
 ALLOWED_HOSTS = [
     'localhost',
     '127.0.0.1',
+    'seneque.lan',
+    '192.168.86.249',
     '.platformsh.site',
 ]
 
