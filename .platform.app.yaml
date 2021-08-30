@@ -12,8 +12,8 @@ type: 'python:3.9'
 # The build-time dependencies of the app.
 dependencies:
     python3:
-        pip: '21.0'
-        pipenv: '2020.11.15'
+        pip: '21.2.4'
+        pipenv: '2021.5.29'
 
 # The relationships of the application with services or other applications.
 #
