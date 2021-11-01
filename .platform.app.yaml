@@ -9,6 +9,10 @@ name: app
 # to find the supported versions for the 'python' type.
 type: 'python:3.9'
 
+runtime:
+    extensions:
+        - blackfire
+
 # The build-time dependencies of the app.
 dependencies:
     python3:
