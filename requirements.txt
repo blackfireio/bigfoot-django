@@ -1,4 +1,4 @@
-asgiref==3.3.4
+asgiref==3.4.0
 blackfire>=1.5.6
 Django>=3.1.8,<4.0
 Faker==8.1.1
