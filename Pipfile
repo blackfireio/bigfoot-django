@@ -4,7 +4,7 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-blackfire = ">=1.5.6"
+blackfire = ">=1.7.1"
 Django = ">=3.1.8,<4.0"
 Faker = ">=6.6.1"
 gunicorn = "*"
